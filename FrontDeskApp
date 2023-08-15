@@ -1,0 +1,154 @@
+class Front:
+    def __init__(x,first,last,num):
+        x.first=first
+        x.last=last
+        x.num=num
+        
+    def check(x,pkg):
+        x.pkg=pkg
+        if x.pkg == 'S':
+            print("Small Box Area \n",S)
+         
+        elif x.pkg == 'M':
+            print("Medium Box Area \n",M)
+         
+        elif x.pkg == 'L':
+            print("Large Box Area \n",L)
+           
+            
+    def store(x,unit):
+        x.unit=unit
+        if x.pkg == 'S':
+            if S['unit '+x.unit]==0:
+                S['unit '+x.unit]=[x.first,x.last,x.num]
+                print('Stored!')
+            else:
+                print('Already occupied! Try again.')
+        elif x.pkg == 'M':
+            if M['unit '+x.unit]==0:
+                M['unit '+x.unit]=[x.first,x.last,x.num]
+                print('Stored!')
+            else:
+                print('Already occupied! Try again.')
+        elif x.pkg == 'L':
+            if L['unit '+x.unit]==0:
+                L['unit '+x.unit]=[x.first,x.last,x.num]
+                print('Stored!')
+            else:
+                print('Already occupied! Try again.')
+                
+    def retrieve(x,unit):
+        x.unit=unit
+        if x.pkg == 'S':
+            if S['unit '+x.unit]==[x.first,x.last,x.num]:
+                S['unit '+x.unit]=0
+                print('Retrieved!')
+            else:
+                print('Cannot retrieve empty/occupied space! Try again.')
+        elif x.pkg == 'M':
+            if M['unit '+x.unit]==[x.first,x.last,x.num]:
+                M['unit '+x.unit]=0
+                print('Retrieved!')
+            else:
+                print('Cannot retrieve empty/occupied space! Try again.')
+        elif x.pkg == 'L':
+            if L['unit '+x.unit]==[x.first,x.last,x.num]:
+                L['unit '+x.unit]=0
+                print('Retrieved!')
+            else:
+                print('Cannot retrieve empty/occupied space! Try again.')
+                
+class Record(Front):
+    def __init__(x,first,last,num,unit):
+        x.first=first
+        x.last=last
+        x.num=num
+        x.unit=unit
+        
+    def record(x,process,d ate):
+        x.process=process
+        if x.process == "S":
+            x.process = 'Stored'
+        elif x.process == 'R':
+            x.process = 'Retrieved'
+        x.date=date
+        Rec.append([x.date+' - '+x.first,x.last,x.num+' - '+x.process, x.unit+ ' box'])
+        print('Recorded!')
+           
+            
+def full(pkg):
+    
+    if pkg == 'S':
+        pkg=S
+         
+    elif pkg == 'M':
+        pkg=M
+         
+    elif pkg == 'L':
+        pkg=L
+        
+    i=list(filter(lambda x:x!=0, pkg.values()))
+    if len(i)!=len(pkg):
+        return True
+    else:
+        return False
+#------------------------------------------------------------
+
+ch=0
+S={}
+for i in range(0,50): 
+    S['unit '+str(i)]=0 
+M={} 
+for i in range(0,16): 
+    M['unit '+str(i)]=0 
+L={} 
+for i in range(0,14): 
+    L['unit '+str(i)]=0
+Rec=[]                           #databases^^^
+
+while ch!=4: 
+    inp=input('''1)Store/Retrieve\n 2)Check Availability\n 3)Record\n 4)quit''') 
+    if inp=='1': 
+        user=Front(input('First name:'), input('Last name:'), input('Phone No.:')) 
+        opt1=input('''1)Store\n 2)Retrieve''') 
+        pkg=input('Package(S/M/L):').upper()
+        if opt1=='1': 
+            
+            if pkg not in ['S','M','L']: 
+                print('Invalid input!') 
+            else: 
+                user.check(pkg) 
+                if full(pkg):
+                    user.store(input('Store in Unit:'))
+                else:
+                    print('Not enough space!')
+                    
+        elif opt1=='2':
+            if pkg not in ['S','M','L']: 
+                print('Invalid input!') 
+            else: 
+                user.check(pkg) 
+                user.retrieve(input('Retrieve Unit:'))
+
+    elif inp=='2':
+        opt2=input('Area(S/M/L):')
+        if opt2=='S':
+            print("Small Box Area \n",S,end='\n')
+        elif opt2=='M':
+            print("Medium Box Area \n",M,end='\n')
+        elif opt3=='L':
+            print("Large Box Area \n",L,end='\n')
+        else:
+            print('Invalid input!')
+    
+    elif inp=='3':
+        opt3=input('1)Add Record\n 2)View Records')
+        if opt3=='1':
+            user2=Record(input('First name:'), input('Last name:'), input('Phone No.:'), input('Package(S/M/L):'))
+            user2.record(input('Stored/Retrieved(S/R):'), input('Date(YYYY/MM/DD):'))
+        elif opt3=='2':
+            print(Rec)
+    else:
+        print("Thanks for using this app!")
+        ch=4
+        
